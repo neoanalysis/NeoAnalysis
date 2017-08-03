@@ -363,6 +363,7 @@ class AnalogFilter():
                         self.__draw_p1()
         else:
             print('please check input value, or if special channel is selected')
+            
     def __filter_bandstop(self,value):
         # check the legality of inputted bandstop value 
         values = value.split(',')

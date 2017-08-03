@@ -135,8 +135,8 @@ setup(
         'h5py>=2.6.0',
         'statsmodels>=0.6.1',
         'seaborn>=0.7.1'
-    ]
+    ],
 
-    # **setupOpts
+    **setupOpts
 )
 

@@ -21,7 +21,7 @@ def is_num(ite_val):
         return False
     return True
 
-def band_pass(ite_data,freqmin,freqmax,samp_freq,corners=32):
+def band_pass(ite_data,freqmin,freqmax,samp_freq,corners=32,zerophase=True):
     fe = samp_freq/2.0
     low = freqmin/fe
     high = freqmax/fe
@@ -36,10 +36,11 @@ def band_pass(ite_data,freqmin,freqmax,samp_freq,corners=32):
     z,p,k = signal.iirfilter(corners,[low,high],btype='band',ftype='butter',output='zpk')
     sos = zpk2sos(z,p,k)
     ite_data = sosfilt(sos,ite_data)
-    ite_data = sosfilt(sos,ite_data[::-1])[::-1]
+    if zerophase:
+        ite_data = sosfilt(sos,ite_data[::-1])[::-1]
     return ite_data
 
-def band_stop(ite_data,freqmin,freqmax,samp_freq,corners=4):
+def band_stop(ite_data,freqmin,freqmax,samp_freq,corners=4,zerophase=True):
     fe = samp_freq/2.0
     low = freqmin/fe
     high = freqmax/fe
@@ -54,8 +55,10 @@ def band_stop(ite_data,freqmin,freqmax,samp_freq,corners=4):
     z,p,k = signal.iirfilter(corners,[low,high],btype='bandstop',ftype='butter',output='zpk')
     sos = zpk2sos(z,p,k)
     ite_data = sosfilt(sos,ite_data)
-    ite_data = sosfilt(sos,ite_data[::-1])[::-1]
+    if zerophase:
+        ite_data = sosfilt(sos,ite_data[::-1])[::-1]
     return ite_data
+
 def one_elem_list(ite):
     if len(ite)==1:
         return ite[0]

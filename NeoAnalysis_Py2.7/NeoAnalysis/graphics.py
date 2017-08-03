@@ -1182,7 +1182,7 @@ class Graphics():
             print("Data are stored now")
 
     # filter analog signals
-    def analog_filter(self,channel,band_pass=None,band_stop=None):
+    def analog_filter(self,channel,band_pass=None,band_stop=None,zerophase=True):
         '''
         Args
             channel (string):
@@ -1197,11 +1197,11 @@ class Graphics():
             -
         '''
         if band_pass is not None:
-            self.__band_pass(channel,band_pass[0],band_pass[1])
+            self.__band_pass(channel,band_pass[0],band_pass[1],zerophase=zerophase)
         if band_stop is not None:
-            self.__band_stop(channel,band_stop[0],band_stop[1])
+            self.__band_stop(channel,band_stop[0],band_stop[1],zerophase=zerophase)
 
-    def __band_pass(self,channel,freqmin,freqmax,corners=32):
+    def __band_pass(self,channel,freqmin,freqmax,corners=32,zerophase=True):
         fe = self.sampling_rate[channel]
         low = freqmin/fe
         high = freqmax/fe
@@ -1216,15 +1216,16 @@ class Graphics():
             msg = "Selected low corner frequency is above Nyquist."
             raise ValueError(msg)
         z, p, k = signal.iirfilter(corners, [low, high], btype='band',
-                            ftype='butter', output='zpk')
+                            ftype='butter', output='zpk',)
         sos = zpk2sos(z, p, k)
         def bandpass(ite,sos=sos):
             ite = sosfilt(sos, ite)
-            ite = sosfilt(sos,ite[::-1])[::-1]
+            if zerophase:
+                ite = sosfilt(sos,ite[::-1])[::-1]
             return ite
         self.data_df[channel] = self.data_df[channel].apply(bandpass)
 
-    def __band_stop(self,channel,freqmin,freqmax,corners=4):
+    def __band_stop(self,channel,freqmin,freqmax,corners=4,zerophase=True):
         fe = self.sampling_rate[channel]
         low = freqmin/fe
         high = freqmax/fe
@@ -1243,7 +1244,8 @@ class Graphics():
         sos = zpk2sos(z, p, k)
         def bandpass(ite,sos=sos):
             ite = sosfilt(sos, ite)
-            ite = sosfilt(sos,ite[::-1])[::-1]
+            if zerophase:
+                ite = sosfilt(sos,ite[::-1])[::-1]
             return ite
         self.data_df[channel] = self.data_df[channel].apply(bandpass)
 
