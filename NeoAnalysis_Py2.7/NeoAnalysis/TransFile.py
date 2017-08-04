@@ -90,7 +90,7 @@ class transfile():
                 times = np.array(ang.times.rescale(pq.ms))
                 data = np.array(ang.rescale(pq.mV))
                 data.shape = data.shape[0]
-                sampling_rate = float(ang.sampling_rate.rescale(pq.Hz))
+                sampling_rate = int(ang.sampling_rate.rescale(pq.Hz))
                 analogs['analogs'][key] = {'data':data, 'start_time':times[0], 'sampling_rate':sampling_rate}
         
         # event entity
@@ -133,7 +133,7 @@ class transfile():
                 times = np.array(ang.times.rescale(pq.ms))
                 data = np.array(ang.rescale(pq.mV))
                 data.shape = data.shape[0]
-                sampling_rate = float(ang.sampling_rate.rescale(pq.Hz))
+                sampling_rate = int(ang.sampling_rate.rescale(pq.Hz))
                 analogs['analogs'][key] = {'data':data,'start_time':times[0],'sampling_rate':sampling_rate}
 
         # event entity

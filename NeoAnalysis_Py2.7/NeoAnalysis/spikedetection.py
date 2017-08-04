@@ -257,6 +257,7 @@ class SpikeDetection():
                 with hp.File(self.file_name,'r') as f:
                     self.start_time = f['analogs'][self.select_chn]['start_time'].value
                     self.sampling_rate = f['analogs'][self.select_chn]['sampling_rate'].value
+                    self.sampling_rate = int(self.sampling_rate)
                     self.rows = np.arange(int(math.ceil(f['analogs'][self.select_chn]['data'].value.shape[0]*1.0/self.sampling_rate)))
                 for i in range(self.row_num):
                     self.row_wins_rois[i].setMovable(True)
