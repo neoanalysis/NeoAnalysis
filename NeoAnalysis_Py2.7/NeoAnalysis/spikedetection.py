@@ -593,7 +593,7 @@ class SpikeDetection():
             if chan_exist is True:
                 save_msg = QtWidgets.QMessageBox()
                 save_msg.setIcon(QtWidgets.QMessageBox.Information)
-                save_msg.setText('channel {0} already exists. Do you want to rewrite it ?'.format(self.select_chn.replace('analog_','')))
+                save_msg.setText('spike_{0} already exists. Do you want to rewrite it ?'.format(self.select_chn.replace('analog_','')))
 
                 save_msg.setStandardButtons(QtWidgets.QMessageBox.Save |  QtWidgets.QMessageBox.Cancel)
                 save_msg.setDefaultButton(QtWidgets.QMessageBox.Save)
