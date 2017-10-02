@@ -944,7 +944,7 @@ class SpikeSorting():
     def __err_msg(self):
         err_msg = QtWidgets.QMessageBox()
         err_msg.setIcon(QtWidgets.QMessageBox.Information)
-        err_msg.setText("An error happened when trying to execute SPC.\nSince we use an independent execute file to do SPC, which need to create several temporary files in your computer.\nThis error may be due to permission denied or some incompatibility reasons.\nThe temporary file path can be see using command os.getcwd() in the python file you are running.\nYou can also contact use through zhangbo_1008@163.com \nWe are happy to provide help.")
+        err_msg.setText("An error happened when trying to execute SPC.\nSince we use an independent execute file to do SPC, which need to create several temporary files in your computer.\nThis error may be due to permission denied or some incompatibility reasons.\nThe temporary file path can be see using command os.getcwd() in the python file you are running.\nYou can also contact use through zhangbo_1008@163.com \nWe are happy to provide help.\nBy the way, you can still sort spikes manually.")
         
         err_msg.addButton("Cancel",QtGui.QMessageBox.YesRole)
         # err_msg.addButton("onlySaveProcessedChns",QtGui.QMessageBox.YesRole)
