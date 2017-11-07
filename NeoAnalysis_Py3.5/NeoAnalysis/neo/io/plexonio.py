@@ -138,8 +138,8 @@ class PlexonIO(BaseIO):
 
         ## Step 2 : a first loop for counting size
         # signal
-        nb_samples = np.zeros(len(slowChannelHeaders))
-        sample_positions = np.zeros(len(slowChannelHeaders))
+        nb_samples = np.zeros(len(slowChannelHeaders),dtype=int)
+        sample_positions = np.zeros(len(slowChannelHeaders),dtype=int)
         t_starts = np.zeros(len(slowChannelHeaders), dtype='f')
 
         #spiketimes and waveform
