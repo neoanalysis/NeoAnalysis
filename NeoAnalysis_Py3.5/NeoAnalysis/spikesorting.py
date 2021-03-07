@@ -740,7 +740,7 @@ class SpikeSorting():
         self.__selectChan()
 
     def __deleteChn(self,f,selectChan):
-        spk_startswith = "spike_{0}".format(selectChan)
+        spk_startswith = "spike_{0}_".format(selectChan)
         for chn in f['spikes'].keys():
             if chn.startswith(spk_startswith):
                 del f['spikes'][chn]
@@ -748,7 +748,7 @@ class SpikeSorting():
     def __loadChnTimeWave(self,f,selectChan):
         times = list()
         waveforms = list()
-        spk_startswith = "spike_{0}".format(selectChan)
+        spk_startswith = "spike_{0}_".format(selectChan)
         for chn_unit in f["spikes"].keys():
             if chn_unit.startswith(spk_startswith):
                 time = f["spikes"][chn_unit]["times"].value
@@ -1014,7 +1014,7 @@ class SpikeSorting():
         return temp
 
     def __load_waveforms(self,selectChan,file_name):
-        spk_startswith = "spike_{0}".format(selectChan)
+        spk_startswith = "spike_{0}_".format(selectChan)
         with hp.File(file_name,"r") as f:
             times = list()
             waveforms = list()
@@ -1117,7 +1117,7 @@ class SpikeSorting():
         times = list()
         masks = list()
         with hp.File(self.file_name,"r") as f:
-            spk_startswith = "spike_{0}".format(self.selectChan)
+            spk_startswith = "spike_{0}_".format(self.selectChan)
             for chn_unit in f["spikes"].keys():
                 if chn_unit.startswith(spk_startswith):
                     tep_time = f["spikes"][chn_unit]["times"].value
@@ -1149,7 +1149,7 @@ class SpikeSorting():
                 # return None, None
 
     def __load_chn_data(self,selectChan,file_name):
-        spk_startswith = "spike_{0}".format(selectChan)
+        spk_startswith = "spike_{0}_".format(selectChan)
         with hp.File(file_name,"r") as f:
             times = list()
             waveforms = list()
